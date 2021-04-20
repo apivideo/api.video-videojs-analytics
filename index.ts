@@ -18,6 +18,7 @@ export class VideoJsApiVideoAnalytics extends Plugin {
     private options: VideoJsApiVideoAnalyticsOptions;
     private skipNextSeek = false;
     private isFirstInit = true;
+    private lastSegmentBandwidth = 0;
 
     private playerAnalytics!: PlayerAnalytics;
 
@@ -67,10 +68,43 @@ export class VideoJsApiVideoAnalytics extends Plugin {
     }
 
 
+    private initSegmentsWatcher() {
+        const tracks = this.player.textTracks();
+
+        if (!tracks) {
+            return;
+        }
+
+        // tslint:disable-next-line
+        for (let i = 0; i < tracks.length; i++) {
+            if (tracks[i].label === 'segment-metadata') {
+                const segmentMetadataTrack = tracks[i] as any;
+
+                segmentMetadataTrack.on('cuechange', () => {
+                    const activeCue = segmentMetadataTrack.activeCues[0];
+
+                    if (!activeCue?.value) {
+                        return;
+                    }
+
+                    this.handleEvent('segmentchange', activeCue.value);
+
+                    if (this.lastSegmentBandwidth !== activeCue.value.bandwidth) {
+                        this.lastSegmentBandwidth = activeCue.value.bandwidth;
+                        this.handleEvent('qualitychange', activeCue.value.resolution);
+                    }
+
+                });
+                return;
+            }
+        }
+    }
+
     private handleEvent(eventName: string, event: any) {
 
         if (this.options.onEvent && eventName === 'loadedmetadata') {
             this.options.onEvent({ type: 'ready' });
+            this.initSegmentsWatcher();
         }
 
         if (eventName === 'timeupdate') {
@@ -119,8 +153,14 @@ export class VideoJsApiVideoAnalytics extends Plugin {
             this.playerAnalytics.end();
         }
 
-        if (this.options.onEvent && relayedEvents.indexOf(eventName) > -1) {
-            this.options.onEvent({ type: eventName });
+        if (this.options.onEvent) {
+            this.options.onEvent({
+                type: eventName,
+                ...(eventName === 'timeupdate' ? { currentTime: this.player.currentTime() } : {}),
+                ...(eventName === 'volumechange' ? { volume: this.player.volume() } : {}),
+                ...(eventName === 'segmentchange' ? { segment: event } : {}),
+                ...(eventName === 'qualitychange' ? { resolution: event } : {}),
+            });
         }
     }
 }
@@ -147,22 +187,17 @@ const events = [
     'timeupdate',
     'waiting',
     'loadedmetadata',
-]
-
-const relayedEvents = [
-    'ended',
-    'error',
-    'firstplay',
-    'fullscreenchange',
-    'loadstart',
-    'pause',
-    'play',
-    'playerresize',
-    'ready',
-    'seeking',
-    'waiting',
+    'useractive',
+    'userinactive',
+    'volumechange',
 ];
 
 export type VideoJsApiVideoAnalyticsOptions = PlayerAnalyticsOptions & {
     onEvent?: (event: any) => void;
+}
+
+type VideoQuality = {
+    width: number;
+    height: number;
+    bandwidth: number;
 }
