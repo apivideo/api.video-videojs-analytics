@@ -1,6 +1,9 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [1.0.3] - 2021-04-21
+- Add some more videojs events
+  
 ## [1.0.2] - 2021-04-20
 - Relay all listened events
 
