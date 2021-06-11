@@ -1,6 +1,6 @@
 {
   "name": "@api.video/videojs-player-analytics",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "api.video player analytics plugin for videojs",
   "repository": {
     "type": "git",
@@ -44,7 +44,7 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "@api.video/player-analytics": "^1.0.2",
+    "@api.video/player-analytics": "^1.0.3",
     "@types/video.js": "^7.3.15",
     "core-js": "^3.10.0",
     "url-polyfill": "^1.1.12"
