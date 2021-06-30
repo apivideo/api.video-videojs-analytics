@@ -1,6 +1,9 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [1.0.7] - 2021-06-30
+- Bump npm player-analytics dependency version
+
 ## [1.0.4] - 2021-04-21
 - Bump @api.video/player-analytics
   
