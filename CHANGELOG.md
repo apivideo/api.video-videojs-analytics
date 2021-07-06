@@ -1,6 +1,9 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [1.0.9] - 2021-07-06
+- Bump npm player-analytics dependency version
+
 ## [1.0.8] - 2021-06-30
 - Add dist/*
 
