@@ -1,20 +1,30 @@
-[![badge](https://img.shields.io/twitter/follow/api_video?style=social)](https://twitter.com/intent/follow?screen_name=api_video)
-
-[![badge](https://img.shields.io/github/stars/apivideo/videojs-player-analytics?style=social)](https://github.com/apivideo/videojs-player-analytics)
-
-[![badge](https://img.shields.io/discourse/topics?server=https%3A%2F%2Fcommunity.api.video)](https://community.api.video)
-
+[![badge](https://img.shields.io/twitter/follow/api_video?style=social)](https://twitter.com/intent/follow?screen_name=api_video) &nbsp; [![badge](https://img.shields.io/github/stars/apivideo/api.video-videojs-analytics?style=social)](https://github.com/apivideo/api.video-videojs-analytics) &nbsp; [![badge](https://img.shields.io/discourse/topics?server=https%3A%2F%2Fcommunity.api.video)](https://community.api.video)
 ![](https://github.com/apivideo/API_OAS_file/blob/master/apivideo_banner.png)
+![npm](https://img.shields.io/npm/v/@api.video/videojs-player-analytics) ![ts](https://badgen.net/badge/-/TypeScript/blue?icon=typescript&label)
+<h1 align="center">api.video React Native video player</h1>
 
-[api.video](https://api.video) is an API that encodes on the go to facilitate immediate playback, enhancing viewer streaming experiences across multiple devices and platforms. You can stream live or on-demand online videos within minutes.
+[api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
-# api.video player analytics plugin for videojs
+
+# Table of contents
+
+- [Table of contents](#table-of-contents)
+- [Project description](#project-description)
+- [Getting started](#getting-started)
+  - [Installation](#installation)
+    - [Method #1: requirejs](#method-1-requirejs)
+    - [Method #2: typescript](#method-2-typescript)
+    - [Method #3: simple include in a javascript project](#method-3-simple-include-in-a-javascript-project)
+
+# Project description
 
 video.js plugin to call the api.video analytics collector. 
 
-# Plugin usage
+# Getting started
 
-## Installation method #1: requirejs
+## Installation 
+
+### Method #1: requirejs
 
 If you use requirejs you can add the plugin as a dependency to your project with 
 
@@ -33,7 +43,7 @@ const player = videojs('my-video');
 player.apiVideoAnalytics();
 ```
 
-## Installation method #2: typescript
+### Method #2: typescript
 
 If you use Typescript you can add the plugin as a dependency to your project with 
 
@@ -54,7 +64,7 @@ player.apiVideoAnalytics();
 
 ```
 
-## Simple include in a javascript project
+### Method #3: simple include in a javascript project
 
 Include the plugin in your HTML file like so:
 
