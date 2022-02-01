@@ -19,18 +19,27 @@ export class VideoJsApiVideoAnalytics extends Plugin {
     private skipNextSeek = false;
     private isFirstInit = true;
     private lastSegmentBandwidth = 0;
-
     private playerAnalytics!: PlayerAnalytics;
+    private passthrough: boolean = false;
+    private lastMediaUrl?: string = undefined;
 
     constructor(player: VideoJsPlayer, options: VideoJsApiVideoAnalyticsOptions) {
         super(player);
 
         this.options = options || {};
-
         if (!isWithCustomOptions(this.options) && !isWithMediaUrl(this.options)) {
             player.on('loadstart', (_) => {
-                (this.options as any).mediaUrl = player.src();
-                this.setOptions(this.options);
+                const src = player.src();
+                if (this.isApiVideoMediaUrl(src)) {
+                    this.passthrough = false;
+                    if(this.lastMediaUrl !== src) {
+                        (this.options as any).mediaUrl = src;
+                        this.setOptions(this.options);
+                        this.lastMediaUrl = src;
+                    }
+                } else {
+                    this.passthrough = true;
+                }
             });
         } else {
             this.setOptions(this.options);
@@ -56,7 +65,6 @@ export class VideoJsApiVideoAnalytics extends Plugin {
             }
 
             if (!!options.sequence) {
-
                 this.skipNextSeek = true;
             }
 
@@ -67,6 +75,14 @@ export class VideoJsApiVideoAnalytics extends Plugin {
         });
     }
 
+    private isApiVideoMediaUrl(mediaUrl: string): boolean {
+        try {
+            PlayerAnalytics.parseMediaUrl(mediaUrl);
+            return true;
+        } catch (e: any) {
+            return false;
+        }
+    }
 
     private initSegmentsWatcher() {
         const tracks = this.player.textTracks();
@@ -101,6 +117,9 @@ export class VideoJsApiVideoAnalytics extends Plugin {
     }
 
     private handleEvent(eventName: string, event: any) {
+        if (this.passthrough) {
+            return;
+        }
 
         if (this.options.onEvent && eventName === 'loadedmetadata') {
             this.options.onEvent({ type: 'ready' });
