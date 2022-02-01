@@ -29,8 +29,11 @@ export declare class VideoJsApiVideoAnalytics extends Plugin {
     private isFirstInit;
     private lastSegmentBandwidth;
     private playerAnalytics;
+    private passthrough;
+    private lastMediaUrl?;
     constructor(player: VideoJsPlayer, options: VideoJsApiVideoAnalyticsOptions);
     setOptions(options: VideoJsApiVideoAnalyticsOptions): void;
+    private isApiVideoMediaUrl;
     private initSegmentsWatcher;
     private handleEvent;
 }
