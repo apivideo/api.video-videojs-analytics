@@ -21,7 +21,8 @@
   "scripts": {
     "tslint": "tslint --project .",
     "build": "npm run tslint && webpack --mode production",
-    "test": "npm run tslint && jest"
+    "test": "npm run tslint && jest",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
