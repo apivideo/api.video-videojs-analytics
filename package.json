@@ -1,6 +1,6 @@
 {
   "name": "@api.video/videojs-player-analytics",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "api.video player analytics plugin for videojs",
   "repository": {
     "type": "git",
@@ -21,7 +21,8 @@
   "scripts": {
     "tslint": "tslint --project .",
     "build": "npm run tslint && webpack --mode production",
-    "test": "npm run tslint && jest"
+    "test": "npm run tslint && jest",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
