@@ -1,6 +1,6 @@
 {
   "name": "@api.video/videojs-player-analytics",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "api.video player analytics plugin for videojs",
   "repository": {
     "type": "git",

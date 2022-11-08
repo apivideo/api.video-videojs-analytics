@@ -11,8 +11,8 @@ declare module 'video.js' {
 }
 
 export class VideoJsApiVideoAnalytics extends Plugin {
-    private lastPlayingTime: number | undefined;
-    private beforeLastPlayingTime: number | undefined;
+    private lastPlayingTime: number | undefined = 0;
+    private beforeLastPlayingTime: number | undefined = 0;
     private wasSeeking: boolean = false;
     private isFirstPlay = true;
     private options: VideoJsApiVideoAnalyticsOptions;

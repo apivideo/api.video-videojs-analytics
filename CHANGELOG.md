@@ -1,6 +1,9 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [1.0.13] - 2022-11-08
+- Fix "seek" event "from" value when seek is the first event
+  
 ## [1.0.12] - 2022-02-21
 - Disallow arrow functions in webpack configuration
   
