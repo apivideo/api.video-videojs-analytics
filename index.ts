@@ -36,13 +36,6 @@ export class VideoJsApiVideoAnalytics extends Plugin {
             (this.options as any).mediaUrl = src;
             this.setOptions(this.options);
             this.lastMediaUrl = src;
-
-            const videoElt = this.player.el().querySelector("video");
-            if (videoElt) {
-              this.playerAnalytics.ovbserveMedia(videoElt);
-            } else {
-              console.error("No video element found in the player");
-            }
           }
         } else {
           this.passthrough = true;
@@ -59,6 +52,13 @@ export class VideoJsApiVideoAnalytics extends Plugin {
     this.playerAnalytics = new PlayerAnalytics({
       ...options,
     });
+
+    const videoElt = this.player.el().querySelector("video");
+    if (videoElt) {
+      this.playerAnalytics.ovbserveMedia(videoElt);
+    } else {
+      console.error("No video element found in the player");
+    }
 
     this.player.ready(() => {
       if (this.isFirstInit) {

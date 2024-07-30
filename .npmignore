@@ -6,3 +6,5 @@ test
 dist/test
 samples/
 .github/
+index.ts
+jest.config.js
