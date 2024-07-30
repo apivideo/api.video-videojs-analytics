@@ -1,13 +1,12 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended"
-    ],
-    "jsRules": {},
-    "rules": {
-        "quotemark": [true, "single", "avoid-escape", "avoid-template"],
-        "member-access": true,
-        "member-ordering": [true, {"order": "fields-first"}]
-    },
-    "rulesDirectory": []   
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended"],
+  "jsRules": {},
+  "rules": {
+    "quotemark": [true, "single", "avoid-escape", "avoid-template"],
+    "member-access": true,
+    "member-ordering": [true, { "order": "fields-first" }],
+    "no-console": false
+  },
+  "rulesDirectory": []
 }
